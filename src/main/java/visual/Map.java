@@ -49,11 +49,11 @@ public class Map {
 	private void move(int row, int col) {
 		int index = row;
 
-		while (this.content[index][col].it_falls_through()
-				&& this.content[index + 1][col].it_falls_through()
-				&& index < DIMENSION_ROWS) {
+		while (index < DIMENSION_ROWS - 1
+				&& this.content[index][col].it_falls_with_gravity()
+				&& this.content[index + 1][col].it_falls_through()) {
+			this.swap(index, col);
 			index++;
-			this.swap(row, col);
 		}
 	}
 
