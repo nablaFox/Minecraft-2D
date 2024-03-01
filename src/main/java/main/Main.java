@@ -1,21 +1,20 @@
 package main;
 
-import visual.Map;
+import visual.MainGui;
 
 import java.util.Scanner;
 
 public class Main {
 	private static final int INTERACTIONS = 6;
-	private static Map map;
 
 	public static void main(String[] args) {
 		// test_gravity();
-		change_at_coords();
+		// change_at_coords();
 	}
 
 	private static void test_gravity() {
-		map = new Map(false);
-		map.display_on_out();
+		MainGui gui = new MainGui();
+		gui.display_on_out();
 
 		Scanner input = new Scanner(System.in);
 
@@ -24,17 +23,17 @@ public class Main {
 			int col = input.nextInt();
 
 			System.out.println("Dropping a new block in the col: " + col);
-			map.change_chell_to_test(0, col);
+			gui.change_cell_to_test(0, col);
 
-			map.display_on_out();
+			gui.display_on_out();
 		}
 
 		input.close();
 	}
 
 	private static void change_at_coords() {
-		map = new Map(false);
-		map.display_on_out();
+		MainGui gui = new MainGui();
+		gui.display_on_out();
 
 		Scanner input = new Scanner(System.in);
 
@@ -46,9 +45,9 @@ public class Main {
 			int col = input.nextInt();
 
 			System.out.println("Changing the block at row: " + row + " and col: " + col);
-			map.change_chell_to_test(row, col);
+			gui.change_cell_to_test(row, col);
 
-			map.display_on_out();
+			gui.display_on_out();
 		}
 
 		input.close();
