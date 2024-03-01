@@ -46,7 +46,7 @@ public class Map {
 	private void add_random_blocks() {
 		Random rand = new Random();
 		for (int i = 0; i < RANDOM_BLOCKS; i++) {
-			Block block = bf.sand_block();
+			Block block = bf.random_block();
 			int row = rand.nextInt(MapCoordinates.DIMENSION_ROWS);
 			int col = rand.nextInt(MapCoordinates.DIMENSION_COLUMNS);
 

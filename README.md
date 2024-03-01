@@ -8,3 +8,4 @@ Minecraft 3D
 
 - camel case
 - remove unnecessary this
+- remove test block

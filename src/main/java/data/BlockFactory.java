@@ -3,6 +3,7 @@ package data;
 import java.util.Random;
 
 import data.blocks.*;
+import data.blocks.solids.*;
 import data.blocks.interfaces.Block;
 
 public class BlockFactory {
@@ -17,13 +18,13 @@ public class BlockFactory {
 
 		switch (seed) {
 			case 0:
-				return new SandBlock();
+				return sand_block();
 			case 1:
-				return new WaterBlock();
+				return raw_iron_block();
 			case 2:
-				return new AirBlock();
+				return earth_block();
 			default:
-				return this.null_block();
+				return null_block();
 		}
 	}
 
@@ -37,6 +38,14 @@ public class BlockFactory {
 
 	public AirBlock default_block() {
 		return new AirBlock();
+	}
+
+	public RawIronBlock raw_iron_block() {
+		return new RawIronBlock();
+	}
+
+	public EarthBlock earth_block() {
+		return new EarthBlock();
 	}
 
 	public Block test_block() {
