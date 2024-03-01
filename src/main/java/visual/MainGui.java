@@ -1,5 +1,6 @@
 package visual;
 
+import utils.MapCoordinates;
 import data.BlockFactory;
 
 public class MainGui {
@@ -37,11 +38,11 @@ public class MainGui {
 		furnace.smelt();
 	}
 
-	public void change_cell_to_test(int row, int col) {
-		map.change_cell_to_test(row, col);
+	public void change_cell_to_test(MapCoordinates coords) {
+		map.change_cell_to_test(coords);
 	}
 
-	public void move_into_furnace(int row, int col) {
-		furnace.move_into_furnace(row, col, map);
+	public void move_into_furnace(MapCoordinates coords) {
+		furnace.move_into_furnace(coords, map);
 	}
 }

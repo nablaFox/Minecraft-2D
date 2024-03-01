@@ -1,5 +1,6 @@
 package visual;
 
+import utils.MapCoordinates;
 import data.BlockFactory;
 import data.blocks.NullBlock;
 import data.blocks.interfaces.Block;
@@ -24,13 +25,13 @@ public class Furnace {
 				+ " ||");
 	}
 
-	public void move_into_furnace(int row, int col, Map map) {
-		if (!map.is_smeltable(row, col)) {
+	public void move_into_furnace(MapCoordinates coords, Map map) {
+		if (!map.is_smeltable(coords)) {
 			System.out.println("Selection is not smeltable!");
 			return;
 		}
 
-		this.furnace_input = map.get_smeltable(row, col);
+		this.furnace_input = map.get_smeltable(coords);
 		this.furnace_output = this.furnace_input.smelt();
 	}
 

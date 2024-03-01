@@ -1,5 +1,6 @@
 package main;
 
+import utils.MapCoordinates;
 import visual.MainGui;
 
 import java.util.Scanner;
@@ -10,6 +11,30 @@ public class Main {
 	public static void main(String[] args) {
 		// test_gravity();
 		// change_at_coords();
+		test_smelting();
+	}
+
+	private static void test_smelting() {
+		MainGui gui = new MainGui();
+		gui.display_on_out();
+
+		Scanner input = new Scanner(System.in);
+
+		for (int i = 0; i < INTERACTIONS; i++) {
+			System.out.println("Enter row and column, (9, 9) to smelt");
+			int row = input.nextInt();
+			int col = input.nextInt();
+
+			if (row == 9 && col == 9) {
+				gui.smelt();
+			} else {
+				gui.move_into_furnace(new MapCoordinates(row, col));
+			}
+
+			gui.display_on_out();
+		}
+
+		input.close();
 	}
 
 	private static void test_gravity() {
@@ -23,7 +48,7 @@ public class Main {
 			int col = input.nextInt();
 
 			System.out.println("Dropping a new block in the col: " + col);
-			gui.change_cell_to_test(0, col);
+			gui.change_cell_to_test(new MapCoordinates(0, col));
 
 			gui.display_on_out();
 		}
@@ -45,7 +70,7 @@ public class Main {
 			int col = input.nextInt();
 
 			System.out.println("Changing the block at row: " + row + " and col: " + col);
-			gui.change_cell_to_test(row, col);
+			gui.change_cell_to_test(new MapCoordinates(row, col));
 
 			gui.display_on_out();
 		}
