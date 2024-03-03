@@ -4,7 +4,7 @@
 
 Minecraft 3D
 
-## Others TODO
+## Other TODOs
 
 - camel case
 - remove unnecessary this

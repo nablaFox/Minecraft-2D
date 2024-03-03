@@ -9,28 +9,56 @@ public class Main {
 	private static final int INTERACTIONS = 6;
 
 	public static void main(String[] args) {
-		// test_gravity();
+		test_gravity();
 		// change_at_coords();
-		test_smelting();
+		// test_picking();
+		// test_single_pickup();
 	}
 
-	private static void test_smelting() {
+	private static void test_single_pickup() {
 		MainGui gui = new MainGui();
 		gui.display_on_out();
-
 		Scanner input = new Scanner(System.in);
 
 		for (int i = 0; i < INTERACTIONS; i++) {
-			System.out.println("Enter row and column, (9, 9) to smelt");
+			System.out.println("Enter row and then column to pick that block");
 			int row = input.nextInt();
 			int col = input.nextInt();
+			MapCoordinates c = new MapCoordinates(row, col);
+			gui.pick_up_block(c);
+			gui.display_on_out();
+		}
 
-			if (row == 9 && col == 9) {
-				gui.smelt();
+		input.close();
+	}
+
+	private static void test_picking() {
+		MainGui gui = new MainGui();
+		gui.display_on_out();
+		Scanner input = new Scanner(System.in);
+
+		for (int i = 0; i < INTERACTIONS; i++) {
+			System.out.println("Enter row and then column to pick that block");
+			System.out.println("Enter '9' and the item number to move the item to the furnace");
+			System.out.println("Enter '99' and then '9' to smelt");
+			System.out.println("Enter '99' and then '0' to toggle the inventory sorting");
+			System.out.println("Enter '99' and then any number to take from the furnace into the inventory");
+			int row = input.nextInt();
+			int col = input.nextInt();
+			if (row == 9) {
+				gui.move_into_furnace_from_inventory(col);
+			} else if (row == 99) {
+				if (col == 9) {
+					gui.smelt();
+				} else if (col == 0) {
+					gui.toggle_inventory_comparator();
+				} else {
+					gui.move_into_inventory_from_furnace();
+				}
 			} else {
-				gui.move_into_furnace(new MapCoordinates(row, col));
+				MapCoordinates c = new MapCoordinates(row, col);
+				gui.pick_up_block(c);
 			}
-
 			gui.display_on_out();
 		}
 

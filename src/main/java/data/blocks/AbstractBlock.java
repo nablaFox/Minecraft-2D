@@ -7,6 +7,8 @@ public abstract class AbstractBlock implements Block {
 	protected char content;
 	protected boolean falls_with_gravity;
 	protected boolean fall_through;
+	protected boolean pickable;
+	protected boolean destroyable_with_torch;
 
 	public AbstractBlock(
 			String blockname,
@@ -17,22 +19,36 @@ public abstract class AbstractBlock implements Block {
 		this.content = content;
 		this.falls_with_gravity = falls_with_gravity;
 		this.fall_through = fall_through;
+		this.pickable = true;
+		this.destroyable_with_torch = false;
 	}
 
 	public char display() {
-		return this.content;
+		return content;
 	}
 
 	public boolean it_falls_with_gravity() {
-		return this.falls_with_gravity;
+		return falls_with_gravity;
 	}
 
 	public boolean it_falls_through() {
-		return this.fall_through;
+		return fall_through;
+	}
+
+	public boolean is_pickable() {
+		return pickable;
+	}
+
+	public boolean is_destroyable_with_torch() {
+		return destroyable_with_torch;
+	}
+
+	public String display_in_inventory() {
+		return "[" + content + "]";
 	}
 
 	@Override
 	public String toString() {
-		return this.blockname + " [" + this.content + "]";
+		return blockname + " [" + content + "]";
 	}
 }

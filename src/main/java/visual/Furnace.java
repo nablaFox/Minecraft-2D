@@ -1,6 +1,5 @@
 package visual;
 
-import utils.MapCoordinates;
 import data.BlockFactory;
 import data.blocks.NullBlock;
 import data.blocks.interfaces.Block;
@@ -13,40 +12,40 @@ public class Furnace {
 
 	public Furnace(BlockFactory bf) {
 		this.bf = bf;
-		this.furnace_input = this.bf.null_block();
-		this.furnace_output = furnace_input.smelt();
+		furnace_input = bf.null_block();
+		furnace_output = furnace_input.smelt();
 	}
 
 	public void display_on_out() {
-		System.out.println("|| "
-				+ this.furnace_input.display()
-				+ " --> "
-				+ this.furnace_output.display()
-				+ " ||");
+		System.out.println("|| " + furnace_input.display() + " --> " + furnace_output.display() + " ||");
 	}
 
-	public void move_into_furnace(MapCoordinates coords, Map map) {
-		if (!map.is_smeltable(coords)) {
-			System.out.println("Selection is not smeltable!");
-			return;
-		}
-
-		this.furnace_input = map.get_smeltable(coords);
-		this.furnace_output = this.furnace_input.smelt();
+	private void reset_furnace() {
+		furnace_input = bf.null_block();
+		furnace_output = bf.null_block();
 	}
 
-	public void smelt() {
-		if (this.furnace_input instanceof NullBlock)
-			return;
+	public void setInput(SmeltableBlock smeltable) {
+		furnace_input = smeltable;
+		furnace_output = smeltable.smelt();
+	}
+
+	public Block smelt() {
+		if (furnace_input instanceof NullBlock)
+			return furnace_input;
 
 		System.out.println(
-				"Smelting " + this.furnace_input.toString()
-						+ " into " + this.furnace_output.toString());
-		furnace_output = furnace_input.smelt();
-		furnace_input = bf.null_block();
+				"Smelting " + furnace_input.toString()
+						+ " into " + furnace_output.toString());
+
+		Block smelted = furnace_output;
+		reset_furnace();
+		return smelted;
 	}
 
-	public void set_input(SmeltableBlock block) {
-		furnace_input = block;
+	public SmeltableBlock get_input() {
+		SmeltableBlock input = furnace_input;
+		reset_furnace();
+		return input;
 	}
 }

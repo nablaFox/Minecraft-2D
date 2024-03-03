@@ -6,6 +6,7 @@ import data.blocks.interfaces.SmeltableBlock;
 public class NullBlock extends AbstractBlock implements SmeltableBlock {
 	public NullBlock() {
 		super("null", ' ', false, false);
+		this.pickable = false;
 	}
 
 	@Override

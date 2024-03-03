@@ -24,7 +24,7 @@ public class BlockFactory {
 			case 2:
 				return earth_block();
 			default:
-				return null_block();
+				return default_block();
 		}
 	}
 
@@ -42,6 +42,14 @@ public class BlockFactory {
 
 	public RawIronBlock raw_iron_block() {
 		return new RawIronBlock();
+	}
+
+	public GlassBlock glass_block() {
+		return new GlassBlock();
+	}
+
+	public TorchBlock torch_block() {
+		return new TorchBlock();
 	}
 
 	public EarthBlock earth_block() {

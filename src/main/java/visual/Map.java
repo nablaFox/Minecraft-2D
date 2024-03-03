@@ -3,9 +3,11 @@ package visual;
 import java.util.Random;
 
 import utils.MapCoordinates;
+import utils.BlockErrorException;
 import data.BlockFactory;
 import data.blocks.interfaces.Block;
 import data.blocks.interfaces.SmeltableBlock;
+import data.blocks.solids.TorchBlock;
 import data.blocks.AbstractBlock;
 
 public class Map {
@@ -41,6 +43,9 @@ public class Map {
 
 		if (random)
 			add_random_blocks();
+
+		// TODO: temp
+		insert_block_at_coords(bf.torch_block(), new MapCoordinates(2, 0), true);
 	}
 
 	private void add_random_blocks() {
@@ -71,14 +76,29 @@ public class Map {
 			move(coords);
 	}
 
+	private void apply_gravity() {
+		for (int i = MapCoordinates.DIMENSION_ROWS - 1; i >= 0; i--) {
+			for (int j = 0; j < MapCoordinates.DIMENSION_COLUMNS; j++) {
+				if (content[i][j].it_falls_with_gravity())
+					move(new MapCoordinates(i, j));
+			}
+		}
+	}
+
 	private void move(MapCoordinates coords) {
 		int index = coords.get_row();
 		int col = coords.get_col();
 
 		while (index < MapCoordinates.DIMENSION_ROWS - 1
-				&& content[index][col].it_falls_with_gravity()
-				&& content[index + 1][col].it_falls_through()) {
-			swap(new MapCoordinates(index, coords.get_col()));
+				&& content[index][col].it_falls_with_gravity()) {
+			if (content[index + 1][col] instanceof TorchBlock) {
+				content[index][col] = bf.default_block();
+			}
+
+			else if (content[index + 1][col].it_falls_through()) {
+				swap(new MapCoordinates(index, coords.get_col()));
+			}
+
 			index++;
 		}
 	}
@@ -118,23 +138,42 @@ public class Map {
 		add_river();
 	}
 
+	// TODO: add exception for this
 	public Block get_block(MapCoordinates coords) {
+		if (!coords.is_inbound())
+			return bf.null_block();
+
 		return content[coords.get_row()][coords.get_col()];
 	}
 
-	public boolean is_smeltable(MapCoordinates coords) {
+	private boolean is_pickable(MapCoordinates coords) {
+		return get_block(coords).is_pickable();
+	}
+
+	public Block get_pickable(MapCoordinates coords) throws BlockErrorException {
+		if (!is_pickable(coords))
+			throw new BlockErrorException();
+
+		Block pickable = get_block(coords);
+		set_block_at_coords(coords, bf.default_block());
+		apply_gravity();
+		return pickable;
+	}
+
+	private boolean is_smeltable(MapCoordinates coords) {
 		return get_block(coords) instanceof SmeltableBlock;
 	}
 
-	public SmeltableBlock get_smeltable(MapCoordinates coords) {
+	public SmeltableBlock get_smeltable(MapCoordinates coords) throws BlockErrorException {
 		if (!is_smeltable(coords))
-			return bf.null_block();
+			throw new BlockErrorException();
 
 		SmeltableBlock smeltable = (SmeltableBlock) get_block(coords);
 		set_block_at_coords(coords, bf.default_block());
 		return smeltable;
 	}
 
+	// TODO: remove this
 	public void change_cell_to_test(MapCoordinates coords) {
 		if (!coords.is_inbound())
 			return;
