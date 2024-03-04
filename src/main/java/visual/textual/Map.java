@@ -1,4 +1,4 @@
-package visual;
+package visual.textual;
 
 import java.util.Random;
 

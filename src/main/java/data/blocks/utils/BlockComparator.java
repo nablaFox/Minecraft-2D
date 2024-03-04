@@ -13,7 +13,7 @@ public class BlockComparator implements Comparator<Block> {
 		return Integer.compare(get_value_of_block(b1), get_value_of_block(b2));
 	}
 
-	private int get_value_of_block(Block b) {
+	static public int get_value_of_block(Block b) {
 		if (b instanceof NullBlock) {
 			return 0;
 		}

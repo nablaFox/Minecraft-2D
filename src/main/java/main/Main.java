@@ -1,7 +1,7 @@
 package main;
 
 import utils.MapCoordinates;
-import visual.MainGui;
+import visual.textual.MainGui;
 
 import java.util.Scanner;
 

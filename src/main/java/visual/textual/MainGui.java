@@ -1,4 +1,4 @@
-package visual;
+package visual.textual;
 
 import utils.BlockErrorException;
 import utils.MapCoordinates;

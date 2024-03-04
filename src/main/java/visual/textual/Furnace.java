@@ -1,4 +1,4 @@
-package visual;
+package visual.textual;
 
 import data.BlockFactory;
 import data.blocks.NullBlock;

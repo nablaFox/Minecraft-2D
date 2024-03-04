@@ -1,6 +1,5 @@
 package main;
 
-// used for "extends Application"
 import javafx.application.Application;
 
 import javafx.event.EventHandler;
@@ -9,30 +8,58 @@ import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-// top level container. It's the window of the application
+// TODO: temp
+import visual.gui.BlockPane;
+import visual.gui.InventoryPane;
+import visual.gui.MapPane;
+
+import java.util.ArrayList;
+
+import data.BlockFactory;
+
 import javafx.stage.Stage;
 
 public class MainFX extends Application {
+	BlockFactory bf;
+
 	@Override
-	// we pass the reference to the window we're using
 	public void start(Stage primaryStage) {
-		Button btn = new Button("Say hello world");
+		bf = new BlockFactory();
 
-		// we pass a callback to the button
-		btn.setOnAction(new EventHandler<ActionEvent>() { // we use a generic and we specify the type of the event
-			@Override
-			public void handle(ActionEvent event) { // the main callbck is this method
-				System.out.println("Hello, JavaFX 17, running on Java 21");
-			}
-		});
+		test_map_pane(primaryStage);
+	}
 
-		StackPane root = new StackPane(); // we create a container
-		root.getChildren().add(btn);
+	private void test_map_pane(Stage primaryStage) {
+		MapPane map_pane = new MapPane();
 
-		Scene scene = new Scene(root, 300, 250); // a scene is a sort of screen
+		Scene scene = new Scene(map_pane, 500, 500);
 
-		// we use the reference to the window to set the scene
-		primaryStage.setTitle("Hello World!");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	private void test_inventory_pane(Stage primaryStage) {
+		InventoryPane inventory_pane = new InventoryPane();
+		Scene scene = new Scene(inventory_pane, 300, 250);
+
+		ArrayList<BlockPane> block_panes = new ArrayList<BlockPane>();
+
+		for (int i = 0; i < 10; i++) {
+			block_panes.add(new BlockPane(bf.random_block()));
+		}
+
+		for (BlockPane bp : block_panes) {
+			inventory_pane.add_to_inventory(bp);
+		}
+
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	private void test_block_pane(Stage primaryStage) {
+		BlockFactory bf = new BlockFactory();
+		BlockPane block_pane = new BlockPane(bf.raw_iron_block());
+		Scene scene = new Scene(block_pane, 300, 250);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
