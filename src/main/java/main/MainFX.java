@@ -2,22 +2,21 @@ package main;
 
 import javafx.application.Application;
 
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 
 // TODO: temp
 import visual.gui.BlockPane;
+import visual.gui.FurnacePane;
 import visual.gui.InventoryPane;
 import visual.gui.MapPane;
+import visual.gui.MainGui;
 
 import java.util.ArrayList;
 
 import data.BlockFactory;
 
 import javafx.stage.Stage;
+import utils.MapCoordinates;
 
 public class MainFX extends Application {
 	BlockFactory bf;
@@ -26,11 +25,34 @@ public class MainFX extends Application {
 	public void start(Stage primaryStage) {
 		bf = new BlockFactory();
 
-		test_map_pane(primaryStage);
+		test_main_gui(primaryStage);
+	}
+
+	private void test_main_gui(Stage primaryStage) {
+		MainGui main_gui = new MainGui();
+		Scene scene = new Scene(main_gui, 300, 250);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	private void test_furnace_pane(Stage primaryStage) {
+		FurnacePane furnace_pane = new FurnacePane();
+
+		Scene scene = new Scene(furnace_pane, 300, 250);
+
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	private void test_map_pane(Stage primaryStage) {
 		MapPane map_pane = new MapPane();
+
+		for (int i = 0; i < MapCoordinates.DIMENSION_ROWS; i++) {
+			for (int j = 0; j < MapCoordinates.DIMENSION_COLUMNS; j++) {
+				MapCoordinates coords = new MapCoordinates(j, i);
+				map_pane.set_cell(coords, bf.random_block());
+			}
+		}
 
 		Scene scene = new Scene(map_pane, 500, 500);
 

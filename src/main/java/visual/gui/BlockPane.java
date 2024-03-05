@@ -29,7 +29,7 @@ public class BlockPane extends StackPane {
 		init();
 	}
 
-	private void init() {
+	public void init() {
 		bg = new Rectangle(DIM_SQUARE, DIM_SQUARE);
 		bg.setFill(chooseColorFromBlock(block));
 		bg.setStroke(BLOCK_BORDER);
