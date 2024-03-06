@@ -1,9 +1,10 @@
 package main;
 
 import utils.MapCoordinates;
-import visual.textual.MainGui;
 
 import java.util.Scanner;
+
+import controller.textual.MainTextController;
 
 public class Main {
 	private static final int INTERACTIONS = 6;
@@ -16,8 +17,8 @@ public class Main {
 	}
 
 	private static void test_single_pickup() {
-		MainGui gui = new MainGui();
-		gui.display_on_out();
+		MainTextController gui = new MainTextController(true);
+		gui.update_and_display();
 		Scanner input = new Scanner(System.in);
 
 		for (int i = 0; i < INTERACTIONS; i++) {
@@ -26,15 +27,15 @@ public class Main {
 			int col = input.nextInt();
 			MapCoordinates c = new MapCoordinates(row, col);
 			gui.pick_up_block(c);
-			gui.display_on_out();
+			gui.update_and_display();
 		}
 
 		input.close();
 	}
 
 	private static void test_picking() {
-		MainGui gui = new MainGui();
-		gui.display_on_out();
+		MainTextController gui = new MainTextController(true);
+		gui.update_and_display();
 		Scanner input = new Scanner(System.in);
 
 		for (int i = 0; i < INTERACTIONS; i++) {
@@ -51,7 +52,7 @@ public class Main {
 				if (col == 9) {
 					gui.smelt();
 				} else if (col == 0) {
-					gui.toggle_inventory_comparator();
+					// gui.toggle_inventory_comparator(); // TODO: Implement this
 				} else {
 					gui.move_into_inventory_from_furnace();
 				}
@@ -59,15 +60,15 @@ public class Main {
 				MapCoordinates c = new MapCoordinates(row, col);
 				gui.pick_up_block(c);
 			}
-			gui.display_on_out();
+			gui.update_and_display();
 		}
 
 		input.close();
 	}
 
 	private static void test_gravity() {
-		MainGui gui = new MainGui();
-		gui.display_on_out();
+		MainTextController gui = new MainTextController(true);
+		gui.update_and_display();
 
 		Scanner input = new Scanner(System.in);
 
@@ -78,15 +79,15 @@ public class Main {
 			System.out.println("Dropping a new block in the col: " + col);
 			gui.change_cell_to_test(new MapCoordinates(0, col));
 
-			gui.display_on_out();
+			gui.update_and_display();
 		}
 
 		input.close();
 	}
 
 	private static void change_at_coords() {
-		MainGui gui = new MainGui();
-		gui.display_on_out();
+		MainTextController gui = new MainTextController(true);
+		gui.update_and_display();
 
 		Scanner input = new Scanner(System.in);
 
@@ -100,7 +101,7 @@ public class Main {
 			System.out.println("Changing the block at row: " + row + " and col: " + col);
 			gui.change_cell_to_test(new MapCoordinates(row, col));
 
-			gui.display_on_out();
+			gui.update_and_display();
 		}
 
 		input.close();

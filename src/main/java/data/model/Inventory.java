@@ -1,4 +1,4 @@
-package visual.textual;
+package data.model;
 
 import data.blocks.interfaces.Block;
 import data.blocks.interfaces.SmeltableBlock;
@@ -32,6 +32,10 @@ public class Inventory {
 		sort_inventory();
 	}
 
+	public int get_size() {
+		return blocks.size();
+	}
+
 	// TODO: create a custom exception for this
 	public Block get_block(int index) throws IndexOutOfBoundsException {
 		if (!has_index(index))
@@ -54,11 +58,8 @@ public class Inventory {
 		return (SmeltableBlock) blocks.remove(index);
 	}
 
-	public void display_on_out() {
-		Iterator<Block> iterator = blocks.iterator();
-
-		while (iterator.hasNext())
-			System.out.println(iterator.next().display_in_inventory());
+	public Iterator<Block> get_iterator() {
+		return blocks.iterator();
 	}
 
 	public void toggle_comparator() {

@@ -1,4 +1,4 @@
-package visual.textual;
+package data.model;
 
 import java.util.Random;
 
@@ -173,22 +173,14 @@ public class Map {
 		return smeltable;
 	}
 
+	public Block[][] get_content() {
+		return content;
+	}
+
 	// TODO: remove this
 	public void change_cell_to_test(MapCoordinates coords) {
 		if (!coords.is_inbound())
 			return;
 		insert_block_at_coords(bf.test_block(), coords, true);
-	}
-
-	public void display_on_out() {
-		System.out.println("|============|");
-		for (int i = 0; i < MapCoordinates.DIMENSION_ROWS; i++) {
-			System.out.print("||");
-			for (int k = 0; k < MapCoordinates.DIMENSION_COLUMNS; k++)
-				System.out.print(content[i][k].display());
-			System.out.print("||");
-			System.out.println();
-		}
-		System.out.println("|============|");
 	}
 }

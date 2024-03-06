@@ -1,4 +1,4 @@
-package visual.gui;
+package view.gui;
 
 import data.BlockFactory;
 import data.blocks.interfaces.Block;
@@ -30,7 +30,6 @@ public class MapPane extends GridPane {
 				this,
 				coords.get_row(),
 				coords.get_col());
-
 	}
 
 	public void set_cell(MapCoordinates coords, Block block) {

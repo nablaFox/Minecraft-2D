@@ -1,4 +1,4 @@
-package visual.gui;
+package view.gui;
 
 import data.blocks.interfaces.Block;
 import data.blocks.utils.BlockComparator;

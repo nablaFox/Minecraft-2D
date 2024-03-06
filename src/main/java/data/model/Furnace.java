@@ -1,4 +1,4 @@
-package visual.textual;
+package data.model;
 
 import data.BlockFactory;
 import data.blocks.NullBlock;
@@ -14,10 +14,6 @@ public class Furnace {
 		this.bf = bf;
 		furnace_input = bf.null_block();
 		furnace_output = furnace_input.smelt();
-	}
-
-	public void display_on_out() {
-		System.out.println("|| " + furnace_input.display() + " --> " + furnace_output.display() + " ||");
 	}
 
 	private void reset_furnace() {
@@ -47,5 +43,9 @@ public class Furnace {
 		SmeltableBlock input = furnace_input;
 		reset_furnace();
 		return input;
+	}
+
+	public SmeltableBlock get_output() {
+		return (SmeltableBlock) furnace_output;
 	}
 }

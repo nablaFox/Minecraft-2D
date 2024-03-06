@@ -1,4 +1,4 @@
-package visual.textual;
+package data.model;
 
 import utils.BlockErrorException;
 import utils.MapCoordinates;
@@ -6,29 +6,21 @@ import data.BlockFactory;
 import data.blocks.interfaces.Block;
 import data.blocks.interfaces.SmeltableBlock;
 
-public class MainGui {
+public class MainModel {
 	private Furnace furnace;
 	private Map map;
 	private BlockFactory bf;
 	private Inventory inventory;
 
-	public MainGui() {
+	public MainModel() {
 		this(true);
 	}
 
-	public MainGui(boolean random) {
+	public MainModel(boolean random) {
 		bf = new BlockFactory();
 		map = new Map(bf, random);
 		furnace = new Furnace(bf);
 		inventory = new Inventory();
-	}
-
-	public void display_on_out() {
-		map.display_on_out();
-		System.out.println();
-		inventory.display_on_out();
-		System.out.println();
-		furnace.display_on_out();
 	}
 
 	public void smelt() {
@@ -59,6 +51,18 @@ public class MainGui {
 
 	public void toggle_inventory_comparator() {
 		inventory.toggle_comparator();
+	}
+
+	public Map get_map() {
+		return map;
+	}
+
+	public Furnace get_furnace() {
+		return furnace;
+	}
+
+	public Inventory get_inventory() {
+		return inventory;
 	}
 
 	// TODO: remove this

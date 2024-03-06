@@ -5,14 +5,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 
 // TODO: temp
-import visual.gui.BlockPane;
-import visual.gui.FurnacePane;
-import visual.gui.InventoryPane;
-import visual.gui.MapPane;
-import visual.gui.MainGui;
+import view.gui.BlockPane;
+import view.gui.FurnacePane;
+import view.gui.InventoryPane;
+import view.gui.MapPane;
+import data.model.MainModel;
+import view.gui.MainGui;
 
 import java.util.ArrayList;
 
+import controller.simple.MainSimpleController;
 import data.BlockFactory;
 
 import javafx.stage.Stage;
@@ -29,8 +31,11 @@ public class MainFX extends Application {
 	}
 
 	private void test_main_gui(Stage primaryStage) {
-		MainGui main_gui = new MainGui();
-		Scene scene = new Scene(main_gui, 300, 250);
+		MainSimpleController controller = new MainSimpleController(new MainModel());
+		MainGui layout = controller.get_main_gui();
+
+		Scene scene = new Scene(layout);
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -38,7 +43,7 @@ public class MainFX extends Application {
 	private void test_furnace_pane(Stage primaryStage) {
 		FurnacePane furnace_pane = new FurnacePane();
 
-		Scene scene = new Scene(furnace_pane, 300, 250);
+		Scene scene = new Scene(furnace_pane);
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -54,7 +59,7 @@ public class MainFX extends Application {
 			}
 		}
 
-		Scene scene = new Scene(map_pane, 500, 500);
+		Scene scene = new Scene(map_pane);
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -81,7 +86,7 @@ public class MainFX extends Application {
 	private void test_block_pane(Stage primaryStage) {
 		BlockFactory bf = new BlockFactory();
 		BlockPane block_pane = new BlockPane(bf.raw_iron_block());
-		Scene scene = new Scene(block_pane, 300, 250);
+		Scene scene = new Scene(block_pane);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

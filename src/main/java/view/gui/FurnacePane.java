@@ -1,4 +1,4 @@
-package visual.gui;
+package view.gui;
 
 import data.BlockFactory;
 
