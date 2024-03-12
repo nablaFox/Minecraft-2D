@@ -19,13 +19,18 @@ public class MainSimpleController implements SimpleController {
 		this.main_gui = new MainGui(this);
 
 		SimpleController map_controller = new MapSimpleController(
-				main_model.get_map(), main_gui.get_map_pane());
+				main_model.get_map(),
+				main_gui.get_map_pane());
 
 		SimpleController furnace_controller = new FurnaceSimpleController(
-				main_model.get_furnace(), main_gui.get_furnace_pane());
+				main_model.get_furnace(),
+				main_gui.get_furnace_pane(),
+				this);
 
 		SimpleController inventory_controller = new InventorySimpleController(
-				main_model.get_inventory(), main_gui.get_inventory_pane());
+				main_model.get_inventory(),
+				main_gui.get_inventory_pane(),
+				this);
 
 		controllers = new ArrayList<SimpleController>();
 		controllers.add(map_controller);

@@ -3,8 +3,6 @@ package data.model;
 import utils.BlockErrorException;
 import utils.MapCoordinates;
 import data.BlockFactory;
-import data.blocks.interfaces.Block;
-import data.blocks.interfaces.SmeltableBlock;
 
 public class MainModel {
 	private Furnace furnace;
@@ -24,8 +22,7 @@ public class MainModel {
 	}
 
 	public void smelt() {
-		Block block = furnace.smelt();
-		inventory.add_block(block);
+		inventory.add_block(furnace.smelt());
 	}
 
 	public void pick_up_block(MapCoordinates coords) {
@@ -42,8 +39,7 @@ public class MainModel {
 
 	public void move_into_furnace_from_inventory(int index) {
 		try {
-			SmeltableBlock smeltable = inventory.get_smeltable(index);
-			furnace.setInput(smeltable);
+			furnace.set_input(inventory.get_smeltable(index));
 		} catch (BlockErrorException e) {
 			System.out.println("Not smeltable");
 		}

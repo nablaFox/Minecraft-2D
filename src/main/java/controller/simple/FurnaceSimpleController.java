@@ -1,16 +1,22 @@
 package controller.simple;
 
-import view.gui.BlockPane;
 import view.gui.FurnacePane;
+import view.gui.clickable.ClickableInternalBlockPane;
 import data.model.Furnace;
 
 public class FurnaceSimpleController implements SimpleController {
 	Furnace furnace;
 	FurnacePane furnace_pane;
+	MainSimpleController controller;
 
-	public FurnaceSimpleController(Furnace furnace, FurnacePane furnace_pane) {
+	public FurnaceSimpleController(
+			Furnace furnace,
+			FurnacePane furnace_pane,
+			MainSimpleController controller) {
 		this.furnace = furnace;
 		this.furnace_pane = furnace_pane;
+		this.controller = controller;
+
 		redraw();
 	}
 
@@ -18,10 +24,11 @@ public class FurnaceSimpleController implements SimpleController {
 		furnace_pane.getChildren().clear();
 		furnace_pane.add_text();
 		furnace_pane.getChildren().add(
-				new BlockPane(furnace.get_input()));
+				new ClickableInternalBlockPane(
+						furnace.get_input(), controller));
 		furnace_pane.add_arrow();
 		furnace_pane.getChildren().add(
-				new BlockPane(furnace.get_output()));
+				new ClickableInternalBlockPane(
+						furnace.get_output(), controller));
 	}
-
 }

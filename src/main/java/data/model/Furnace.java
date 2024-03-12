@@ -21,7 +21,7 @@ public class Furnace {
 		furnace_output = bf.null_block();
 	}
 
-	public void setInput(SmeltableBlock smeltable) {
+	public void set_input(SmeltableBlock smeltable) {
 		furnace_input = smeltable;
 		furnace_output = smeltable.smelt();
 	}
@@ -40,12 +40,10 @@ public class Furnace {
 	}
 
 	public SmeltableBlock get_input() {
-		SmeltableBlock input = furnace_input;
-		reset_furnace();
-		return input;
+		return furnace_input;
 	}
 
-	public SmeltableBlock get_output() {
-		return (SmeltableBlock) furnace_output;
+	public Block get_output() {
+		return furnace_output;
 	}
 }

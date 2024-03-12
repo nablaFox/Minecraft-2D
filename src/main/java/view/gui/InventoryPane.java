@@ -5,6 +5,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import view.gui.clickable.ClickableAnonBlockPane;
 
 public class InventoryPane extends HBox {
 	private Text text;
@@ -21,7 +22,7 @@ public class InventoryPane extends HBox {
 		getChildren().add(inventory);
 	}
 
-	public void add_to_inventory(BlockPane bp) {
+	public void add_to_inventory(ClickableAnonBlockPane bp) {
 		inventory.getChildren().add(bp);
 	}
 

@@ -1,14 +1,22 @@
 package view.gui;
 
+// TODO: temp
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import data.BlockFactory;
 import data.blocks.interfaces.Block;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import utils.MapCoordinates;
+import view.gui.clickable.ClickableExternalBlockPane;
+import view.gui.handlers.BlockPaneClickHandlerFactory;
 
 public class MapPane extends GridPane {
-	public MapPane() {
+	BlockPaneClickHandlerFactory handler_factory;
+
+	public MapPane(BlockPaneClickHandlerFactory handler_factory) {
 		super();
+		this.handler_factory = handler_factory;
 		initialize_air();
 	}
 
@@ -38,10 +46,15 @@ public class MapPane extends GridPane {
 
 		BlockPane to_replace = get_block_at_coord(coords);
 
-		if (to_replace == null)
-			super.add(new BlockPane(block), coords.get_col(), coords.get_row());
-		else
+		if (to_replace == null) {
+			EventHandler<MouseEvent> event = handler_factory.create_pick_up_handler(coords);
+			super.add(
+					new ClickableExternalBlockPane(block, event),
+					coords.get_col(),
+					coords.get_row());
+		} else {
 			to_replace.change_block(block);
+		}
 	}
 
 	public static Node get_element_at(GridPane gp, int i, int j) {
